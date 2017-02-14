@@ -22,7 +22,7 @@ Stakeholders
 * Management
 
 
-Architecture Questions:
+##Architecture Questions:
 
 Component Diagrams
 
@@ -42,4 +42,11 @@ After completing an archeitrues diagram
 * Be able to compare strength / weaknesses of architectures / find differences 	
 	* Event based vs Publish Subscribe
 		* Simliarties vs differences
-		
+
+* Learning objective to evaualte 
+ * Can you think about NFPS of system
+ * Can you compare two Architecture
+ * Can you state pros/cons for choosign arch style
+
+
+ 
