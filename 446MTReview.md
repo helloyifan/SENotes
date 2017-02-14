@@ -1,6 +1,7 @@
-Final Will Cover
+#Final Will Cover
 
-One type of question
+##Types of questions
+
 * Advantage/Distadvantage of arch styles
  * Why it is true/untrue
 
@@ -49,4 +50,3 @@ After completing an archeitrues diagram
  * Can you state pros/cons for choosign arch style
 
 
- 
