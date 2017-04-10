@@ -1,0 +1,92 @@
+Add
+
+<dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+      <version>3.4</version>
+      <optional>test</optional>
+    </dependency>
+
+to line 99 of pom.xml
+
+Comment everything except class in taggedpdftest.java
+
+ me 
+    @TestSubject
+    List list = new List(true, false);
+
+    @Mock
+    ListItem mock_item = EasyMock.createStrictMock(ListItem.class);
+
+    @Test
+    public void killMutantOne() {
+        ListItem item = EasyMock.createNiceMock(ListItem.class);
+        List under_list = new List(true, false);
+        item.setListSymbol(EasyMock.anyObject(Chunk.class));
+        item.setIndentationLeft(EasyMock.anyFloat(), EasyMock.anyBoolean());
+        item.setIndentationRight(EasyMock.anyFloat());
+
+        EasyMock.replay(item);
+
+        under_list.add(item);
+
+        EasyMock.verify(item);
+    }
+
+
+    @Test
+    public void killMutantTwo() {
+        
+        EasyMock.expect(mock_item.size()).andReturn(0);
+        EasyMock.expect(mock_item.add(EasyMock.anyObject(ListItem.class))).andReturn(true);
+
+        EasyMock.replay(mock_item);
+
+        ListItem listItem = new ListItem(new Chunk("you are mine!"));
+        list.add(listItem);
+
+        EasyMock.verify(mock_item);
+    }
+
+    @Test
+    public void killMutantThree() {
+        
+        ListItem item = EasyMock.createStrictMock(ListItem.class);
+        List under_list = new List(true, false);
+
+        item.setListSymbol(EasyMock.anyObject(Chunk.class));
+        item.setIndentationLeft(EasyMock.anyFloat(), EasyMock.anyBoolean());
+        item.setIndentationRight(EasyMock.anyFloat());
+
+        EasyMock.replay(item);
+
+        under_list.add(item);
+
+        EasyMock.verify(item);
+    }
+
+    @Test
+    public void killMutantFour() {
+        //same as 2, shouldn't even compile in this case
+        EasyMock.expect(mock_item.size()).andReturn(0);
+        EasyMock.expect(mock_item.add(EasyMock.anyObject(ListItem.class))).andReturn(true);
+
+        EasyMock.replay(mock_item);
+
+        ListItem listItem = new ListItem(new Chunk("Kill mutant!"));
+        list.add(listItem);
+
+        EasyMock.verify(mock_item);
+    }
+
+    @Test
+    public void killMutantFive() {
+        EasyMock.expect(mock_item.add(EasyMock.anyObject(ListItem.class))).andReturn(true);
+
+        EasyMock.replay(mock_item);
+
+        List nested = new List(List.ORDERED, List.NUMERICAL);
+        list.add(nested);
+
+        EasyMock.verify(mock_item);
+    }
